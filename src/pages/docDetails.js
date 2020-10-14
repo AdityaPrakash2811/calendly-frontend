@@ -18,7 +18,7 @@ function docDetails(){
             </div>
             
             <div className="row det1">
-                <div className="card border-primary mb-3 mt-3 ml-5 col-9">
+                <div className="card border-primary mb-3 mt-3 ml-5 col-9 shadow-lg rounded">
                     <div className="card-body bg-waning text-primary">
                         <h1 className="card-title">Dr. ABC</h1><br/>
                         <h2>General Surgeon</h2>

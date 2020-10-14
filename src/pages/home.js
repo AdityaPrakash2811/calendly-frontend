@@ -12,7 +12,7 @@ function Home() {
         </nav>
         </div>
 
-        <div className="card mt-5">
+        <div className="card mt-5 homeCard shadow-lg rounded">
             <div className="card-header bg-primary">
                 Dr. ABC
             </div>

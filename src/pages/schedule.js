@@ -1,20 +1,21 @@
 import React, {/*Component,*/useState} from 'react';
 import {Link} from 'react-router-dom';
 import DatePicker from 'react-datepicker';
-import logo from "./doc.jpeg"
-//import logo1 from "./doc2.png"
+//import DatePicker from '@y0c/react-datepicker';
+import logo from "./doc.jpeg";
 import "react-datepicker/dist/react-datepicker.css";
 import {connect} from 'react-redux';
 import {book} from '../actions/index'; 
 //import store from '../index'
 //import Calendar from 'react-calendar';
+import "../datepicker.css"
 
 const currHour=(new Date().getHours())
-console.log(currHour)
+//console.log(currHour)
 const currDate=(new Date().getDate())
-console.log(currDate)
+//console.log(currDate)
 const currMonth=(new Date().getMonth())
-console.log(currMonth)
+//console.log(currMonth)
 
 function Schedule(props) {
     
@@ -25,6 +26,7 @@ function Schedule(props) {
     const[email,setEmail]=useState('');
     const[phno,setPhno]=useState('');
     const [startDate, setStartDate]=useState(new Date());
+    const[ambulance, setAmbulance]=useState(true);
     //const k=(new Date().getHours())
 
     return (
@@ -44,7 +46,7 @@ function Schedule(props) {
                     <Link to='/docDetails'>
                         <img src={logo} className="logo" alt="doc"/><br/>
                     
-                        <h1><i className='fa fa-user-md'></i> Dr. ABC</h1>
+                        <h1><i className='fa fa-user-md drName'></i> Dr. ABC</h1>
                     </Link>
                     <hr/>
                     <p>
@@ -77,7 +79,7 @@ function Schedule(props) {
                     <div>
                         {
                             props.booked==='book success'? 
-                            <div className="card text-white border-success mb-3 mt-2" role="alert">
+                            <div className="card text-white border-success mb-3 mt-2 shadow-lg rounded resCard" role="alert">
                                 <div className="card-header text-success">Booked</div>
                                 <div className="card-body text-success">
                                     <h5 className="card-title">Congrats<i className="fa fa-exclamation"></i></h5>
@@ -89,7 +91,7 @@ function Schedule(props) {
                     <div>
                         {
                             props.booked==='book fail'?
-                            <div className="card text-white border-danger mb-3 mt-2" role="alert">
+                            <div className="card text-white border-danger mb-3 mt-2 shadow-lg rounded resCard" role="alert">
                                 <div className="card-header text-danger">Unavailable</div>
                                 <div className="card-body text-danger">
                                     <h5 className="card-title">Sorry<i className="fa fa-exclamation"></i></h5>
@@ -114,13 +116,13 @@ function Schedule(props) {
                             </div>:null
                         }
                     </div>
-
-                    <div className="input-group">
+                    <p className="enterDet">Enter Details</p>
+                    <div className="input-group name">
                         <div className="input-group-prepend">
                             <span className="input-group-text" id="inputGroup-sizing-default"><big><i className='fa fa-user'></i></big></span>
                         </div>
                         
-                        <input id="name" placeholder="Name" required type="text" value={name} onChange={(e)=>{setName(e.target.value)}}/><br/>
+                        <input className="shadow-lg bg-white rounded" id="name" placeholder="Name" required type="text" value={name} onChange={(e)=>{setName(e.target.value)}}/><br/>
                         {
                             detailError && name.length===0?
                             <big className="msg">
@@ -134,7 +136,7 @@ function Schedule(props) {
                         <div className="input-group-prepend">
                             <span className="input-group-text" id="inputGroup-sizing-lg"><big><i className='fa fa-envelope'></i></big></span>
                         </div>
-                        <input id="email" placeholder="Email" required type="text" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
+                        <input className="shadow-lg bg-white rounded" id="email" placeholder="Email" required type="text" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
                         {
                             detailError && email.length===0?
                             <big className="msg">
@@ -144,7 +146,7 @@ function Schedule(props) {
                         {
                             emailError? 
                             <big className="msg">
-                                Invalid email(please enter a valid one)
+                                *Invalid email(please enter a valid one)
                             </big> : null
                         }
                     </div>
@@ -153,7 +155,7 @@ function Schedule(props) {
                         <div className="input-group-prepend">
                             <span className="input-group-text" id="inputGroup-sizing-lg"><big><i className='fa fa-phone'></i></big></span>
                         </div>
-                        <input id="phno" placeholder="Contact No." type="number" value={phno} onChange={(e)=>{setPhno(e.target.value)}}/>
+                        <input className="shadow-lg bg-white rounded" id="phno" placeholder="Contact No." type="number" value={phno} onChange={(e)=>{setPhno(e.target.value)}}/>
                         {
                             detailError && phno.length===0?
                             <big className="msg">
@@ -163,7 +165,7 @@ function Schedule(props) {
                         {
                             phnoError? 
                             <big className="msg">
-                                Plese Enter 10 digits in Contact no.
+                                *Please Enter 10 digits in Contact no.
                             </big> : null
                         }
                     </div>
@@ -172,13 +174,12 @@ function Schedule(props) {
                         <div className="input-group-prepend">
                             <span className="input-group-text" id="inputGroup-sizing-lg"><big><i className='fa fa-calendar'></i></big></span>
                         </div>
-                        <DatePicker className="datepicker"
+                        <DatePicker className="datepicker shadow-lg bg-white rounded"
                         selected={startDate} 
                         onChange={date => setStartDate(date)}
                         minDate={new Date()}
                         minTime={new Date().setHours(8)}
                         maxTime={startDate.getDay()===6 ? new Date().setHours(14):new Date().setHours(18)}
-                        showYearDropdown
                         showMonthDropdown
                         //isClearable
                         showTimeSelect
@@ -187,6 +188,7 @@ function Schedule(props) {
                         dateFormat="dd/MM/yyyy"
                         filterDate={date => date.getDay()!==0}
                         />
+                        
                         {
                             (startDate.getDay()!==6 && startDate.getHours()===13) ? 
                             <small className="msg">1PM is lunch hour</small> : 
@@ -194,7 +196,6 @@ function Schedule(props) {
                             <small className="msg">This time slot has passed</small> : null
                         }
                     </div><br/>
-                    
 
                 
                     <button onClick={()=>{ 
@@ -208,7 +209,24 @@ function Schedule(props) {
                                             props.submit(name, email, phno, startDate)} }} 
                                         className="btn bookBtn">Book Appointment</button>
                                         
-                    <div className="row">
+                    <div className="row mt-4">
+                    {
+                        ambulance?<div className="card border-primary mb-3 ambulanceCard shadow-lg rounded">
+                                    <div className="card-header">Ambulance Service</div>
+                                    <div className="card-body text-primary">
+                                        <h5 className="card-title text-danger"><i className="fa fa-ambulance"></i></h5>
+                                        <input type='text' className="bg-light" placeholder="Enter Phno."/>
+                                        <button type="button" className="btn btn-warning mt-4" onClick={()=>{setAmbulance(false)}}>Book Ambulance</button>
+                                    </div>
+                                </div>:<div className="card border-primary mb-3 ambulanceCard shadow-lg p-3 mb-5 rounded">
+                                        <div className="card-header">Ambulance Service</div>
+                                        <div className="card-body text-primary">
+                                            <h5 className="card-title text-danger"><i className="fa fa-ambulance"></i></h5>
+                                            <p>We will contact you shortly.</p>
+                                            <button type="button" className="btn btn-warning mt-4" onClick={()=>{setAmbulance(true)}}>OK</button>
+                                        </div>
+                                    </div>
+                    }
                     </div>
                 </div>
             </div>
