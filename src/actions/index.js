@@ -56,7 +56,41 @@ export const book = ( name,email,phno,startDate ) => {
     }
   });
 
-  /*const addBookSuccess = user => {
+
+
+export const getMeetings = () => {
+  return dispatch => {
+    axios.get('http://localhost:5000/meetings')
+      .then(res => {
+        dispatch(getMeetingSuccess(res.data));
+      })
+      .catch(err => {
+        console.log(err)
+      });
+  };
+};
+
+
+const getMeetingSuccess = data => ({
+  type: 'GET_MEETING_SUCCESS',
+  payload: {data}
+});
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+/*const addBookSuccess = user => {
     return{
         type:'ADD_BOOK_SUCCESS',
         payload:{...user}

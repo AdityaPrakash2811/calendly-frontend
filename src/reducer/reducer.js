@@ -1,6 +1,8 @@
 const iState = {users:[],
                 loading:false,
                 booked:'',
+                meetingFetch:'',
+                length:0,
                 error:null}
 
 
@@ -26,6 +28,16 @@ function reducer(state = iState, action) {
           booked:'book fail',
           error: action.payload.error
         };
+
+
+      case 'GET_MEETING_SUCCESS':
+        return{
+          ...state,
+          users:action.payload,
+          meetingFetch:'Success'
+        };
+
+
       default:
         return state;
     }

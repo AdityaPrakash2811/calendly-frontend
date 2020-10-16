@@ -23,6 +23,15 @@
   color:black;
 }
 
+.homeCardHeader{
+  background-color: #4e5ac5;
+  color:white;
+}
+
+.homeBtn{
+  width:50%;
+}
+
 .schedule{
   /*background-color: #8990ce;*/
   height:92vh;
@@ -101,7 +110,7 @@
 .input-group{
   margin-left: 10%;
   margin-right: 0%;
-  margin-bottom: 10px;
+  /*margin-bottom: 10px;*/
   margin-top: 40px;
 }
 
@@ -157,10 +166,13 @@ i:hover{
 }
 
 .msg{
+  float: left;
   color: red;
-  font-size: 18px;
-  margin-top:7px;
+  font-size: 15px;
+  margin-bottom: 10px;
+  margin-left: 10%;
 }
+
 
 .navbar{
   width:100%;
@@ -195,6 +207,26 @@ i:hover{
   width:40%;
 }
 
+.getPatients{
+  background-color: #e9e9eb;
+  height: 100vh;
+  font-size:20px;
+}
+
+.meetingCard{
+  margin-top:40px;
+  text-align: left;
+  color: #575C62;
+}
+
+.meetingName{
+  margin-left: 10%;
+}
+
+.meetingEmail{
+  float:right;
+  margin-right: 30%;
+}
 
 
 /*.App-logo {

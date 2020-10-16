@@ -111,8 +111,8 @@ function Schedule(props) {
                     <div>
                         {
                             props.loading===true ? 
-                            <div class="spinner-border text-primary" role="status">
-                                <span class="sr-only">Loading...</span>
+                            <div className="spinner-border text-primary" role="status">
+                                <span className="sr-only">Loading...</span>
                             </div>:null
                         }
                     </div>
@@ -123,13 +123,14 @@ function Schedule(props) {
                         </div>
                         
                         <input className="shadow-lg bg-white rounded" id="name" placeholder="Name" required type="text" value={name} onChange={(e)=>{setName(e.target.value)}}/><br/>
-                        {
-                            detailError && name.length===0?
-                            <big className="msg">
-                                *Name is a required field(please enter)   
-                            </big>: null
-                        }
+                        
                     </div>
+                    {
+                        detailError && name.length===0?
+                        <big className="msg">
+                            *Name is a required field
+                        </big>: null
+                    }
 
 
                     <div className="input-group">
@@ -137,38 +138,43 @@ function Schedule(props) {
                             <span className="input-group-text" id="inputGroup-sizing-lg"><big><i className='fa fa-envelope'></i></big></span>
                         </div>
                         <input className="shadow-lg bg-white rounded" id="email" placeholder="Email" required type="text" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
-                        {
-                            detailError && email.length===0?
-                            <big className="msg">
-                                *Email is a required field(please enter)
-                            </big>: null
-                        }
-                        {
-                            emailError? 
-                            <big className="msg">
-                                *Invalid email(please enter a valid one)
-                            </big> : null
-                        }
+                        
+                        
                     </div>
+                    {
+                        detailError && email.length===0?
+                        <big className="msg">
+                            *Email is a required field
+                        </big>: null
+                    }
+                    {
+                        emailError? 
+                        <big className="msg">
+                            *Invalid email
+                        </big> : null
+                    }
 
                     <div className="input-group">
                         <div className="input-group-prepend">
                             <span className="input-group-text" id="inputGroup-sizing-lg"><big><i className='fa fa-phone'></i></big></span>
                         </div>
                         <input className="shadow-lg bg-white rounded" id="phno" placeholder="Contact No." type="number" value={phno} onChange={(e)=>{setPhno(e.target.value)}}/>
-                        {
-                            detailError && phno.length===0?
-                            <big className="msg">
-                                *Contact no. is a required field(please enter)
-                            </big>: null
-                        }
-                        {
-                            phnoError? 
-                            <big className="msg">
-                                *Please Enter 10 digits in Contact no.
-                            </big> : null
-                        }
+                       
+                        
                     </div>
+                    {
+                        detailError && phno.length===0?
+                        <big className="msg">
+                            *Contact no. is a required field
+                        </big>: null
+                    }
+
+                    {
+                        phnoError? 
+                        <big className="msg">
+                            *Please Enter 10 digits in Contact no.
+                        </big> : null
+                    }
 
                     <div className="input-group">
                         <div className="input-group-prepend">
@@ -178,6 +184,9 @@ function Schedule(props) {
                         selected={startDate} 
                         onChange={date => setStartDate(date)}
                         minDate={new Date()}
+                        excludeTimes={[
+                            new Date().setHours(13)
+                        ]}
                         minTime={new Date().setHours(8)}
                         maxTime={startDate.getDay()===6 ? new Date().setHours(14):new Date().setHours(18)}
                         showMonthDropdown
@@ -188,14 +197,14 @@ function Schedule(props) {
                         dateFormat="dd/MM/yyyy"
                         filterDate={date => date.getDay()!==0}
                         />
-                        
-                        {
-                            (startDate.getDay()!==6 && startDate.getHours()===13) ? 
-                            <small className="msg">1PM is lunch hour</small> : 
-                            (startDate.getMonth()===currMonth && startDate.getDate()===currDate && startDate.getHours()<currHour) ? 
-                            <small className="msg">This time slot has passed</small> : null
-                        }
-                    </div><br/>
+                    </div>
+
+                    {
+                        (startDate.getDay()!==6 && startDate.getHours()===13) ? 
+                        <small className="msg">1PM is lunch hour</small> : 
+                        (startDate.getMonth()===currMonth && startDate.getDate()===currDate && startDate.getHours()<currHour) ? 
+                        <small className="msg">This time slot has passed</small> : null
+                    }
 
                 
                     <button onClick={()=>{ 
@@ -207,7 +216,7 @@ function Schedule(props) {
                                                 setPhnoError(false)
                                                 setEmailError(false)
                                             props.submit(name, email, phno, startDate)} }} 
-                                        className="btn bookBtn">Book Appointment</button>
+                                        className="btn bookBtn mt-4">Book Appointment</button>
                                         
                     <div className="row mt-4">
                     {
@@ -218,7 +227,7 @@ function Schedule(props) {
                                         <input type='text' className="bg-light" placeholder="Enter Phno."/>
                                         <button type="button" className="btn btn-warning mt-4" onClick={()=>{setAmbulance(false)}}>Book Ambulance</button>
                                     </div>
-                                </div>:<div className="card border-primary mb-3 ambulanceCard shadow-lg p-3 mb-5 rounded">
+                                </div>:<div className="card border-primary mb-3 ambulanceCard shadow-lg rounded">
                                         <div className="card-header">Ambulance Service</div>
                                         <div className="card-body text-primary">
                                             <h5 className="card-title text-danger"><i className="fa fa-ambulance"></i></h5>

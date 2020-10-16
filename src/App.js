@@ -4,6 +4,7 @@ import Schedule from './pages/schedule';
 import Home from './pages/home';
 import docDetails from './pages/docDetails';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import getPatients from './pages/getPatients';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path='/' exact component={Home} />
           <Route path='/schedule' component={Schedule} />
           <Route path='/docDetails' component={docDetails} />
+          <Route path='/getPatients' component={getPatients} />
         </Switch>
       </div>
     </Router>
